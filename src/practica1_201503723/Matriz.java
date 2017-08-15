@@ -15,18 +15,18 @@ public class Matriz {
     int fila, columna, mina;
     public void Matriz(int nivel){
         if(nivel==1){
-            fila = 4;
-            columna = 4;
+            fila = 6;
+            columna = 6;
             mina=4;
         }
         else if(nivel==2){
-            fila =6;
-            columna=6;
+            fila =8;
+            columna=8;
             mina=8;
         }
         else if(nivel ==3){
-            fila = 8;
-            columna = 8;
+            fila = 10;
+            columna = 10;
             mina = 12;
         }
         ConstruirMatriz(fila, columna);
@@ -41,7 +41,13 @@ public class Matriz {
         ImprimirMatrizJuego();
         NumeroMinasCercanas();
         System.out.println("");
-        ImprimirMatrizMinas();     
+        ImprimirMatrizMinas();
+        System.out.println("");
+        Voltear(1,2);
+        Voltear(2,4);
+        Voltear(1,1);
+        System.out.println("");
+        ImprimirMatrizJuego();
     }
     public void ConstruirMatriz(int fila, int columna){
          matrizminas=new String[fila][columna];
@@ -55,7 +61,7 @@ public class Matriz {
             do{
             filarandom = (int)((Math.random())*fila);
             columnarandom = (int)((Math.random())*columna);
-        }while(matrizminas[filarandom][columnarandom]!=null);
+        }while((matrizminas[filarandom][columnarandom]!=null)||((filarandom==0)||(filarandom==fila-1)||(columnarandom==0)||(columnarandom==columna-1)));
            matrizminas[filarandom][columnarandom]="[M] "; 
     }
         
@@ -65,8 +71,8 @@ public class Matriz {
         int i;
         int j;
         
-        for(i=0;i<fila;i++){
-            for(j=0;j<columna;j++){
+        for(i=1;i<fila-1;i++){
+            for(j=1;j<columna-1;j++){
                 if(matrizminas[i][j]==null){
                     System.out.print("[ ] " );
                 }
@@ -83,8 +89,8 @@ public class Matriz {
 
     public void AsignarMatrizJuego(){
     int i, j;
-        for(i=0;i<fila;i++){
-            for(j=0;j<columna;j++){
+        for(i=1;i<fila-1;i++){
+            for(j=1;j<columna-1;j++){
                 matrizjuego[i][j]="[X] ";
             }
         
@@ -94,16 +100,16 @@ public class Matriz {
     
     public void ImprimirMatrizJuego(){
         int i, j;
-        for(i=0;i<fila;i++){
-            for(j=0;j<columna;j++){
+        for(i=1;i<fila-1;i++){
+            for(j=1;j<columna-1;j++){
                 System.out.print(matrizjuego[i][j]);
             }
             System.out.println("");
         }
     }
     public void Voltear(int x, int y){
-        int filamod = x -1;
-        int columnamod=y -1;
+        int filamod = x ;
+        int columnamod=y ;
         matrizjuego[filamod][columnamod] = matrizminas[filamod][columnamod];
     }
     
